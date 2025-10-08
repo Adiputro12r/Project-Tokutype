@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ひらがな Typing Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game-container">
+    <h1>ひらがな タイピングゲーム</h1>
+    <p id="startMsg">スペースキsーを押してスタート！ (Press SPACE to Start)</p>
+    
+    <p id="word"></p>
+    <div id="typedBox"></div>
+    <input type="text" id="input" placeholder="Type romaji..." autofocus disabled>
+    
+    <p id="score">スコア: 0</p>
+    <p id="time">タイム: 30</p>
+    <p id="wpm">WPM: 0</p>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>
