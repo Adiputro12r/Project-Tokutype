@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kanji Typing Game</title>
+  <link rel="stylesheet" href="../styles/base.css">
+</head>
+<body class="kanji">
+  <div class="game-wrap">
+    <div class="topbar">
+      <div>
+        <a href="../index.html" class="back">← Back</a>
+        <h1>Kanji Typing</h1>
+      </div>
+      <div class="meta">
+        <div class="meta-item">Score: <span id="score">0</span></div>
+        <div class="meta-item">Time: <span id="time">60</span></div>
+        <div class="meta-item">WPM: <span id="wpm">0</span></div>
+      </div>
+    </div>
+
+    <div class="game-card">
+      <p id="startMsg" class="start-msg">Press SPACE to start</p>
+      <div id="word" class="word-line"></div>
+      <div class="typed-area">
+        <div id="typedBox" class="typed-box"></div>
+        <input id="input" class="romaji-input" placeholder="type here (romaji)" disabled />
+      </div>
+      <p class="help">Type onyomi or kunyomi reading using romaji.</p>
+    </div>
+  </div>
+
+  <script src="../../lib/wanakana.min.js"></script>
+  <script type="module" src="../../controller/kanji.js"></script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+/* ============================
+   BASE.CSS — MULTI THEME VERSION
+   Supports:
+   - body.hiragana  → purple-blue
+   - body.katakana  → deep green
+   - body.kanji     → sakura pink
+   ============================ */
+
+:root {
+  --bg: #071226;
+  --card: #071226;
+  --muted: #9aa4b2;
+  --success: #22c55e;
+  --danger: #ff6b6b;
+
+  /* default fallback accent (hiragana) */
+  --accent: #7c5cff;
+  --accent-2: #2bd4d7;
+  --page-bg: linear-gradient(180deg, #12061e 0%, #0c122a 100%);
+}
+
+/* ========== THEMES ========== */
+
+/* 🟣 HIRAGANA (default purple-blue) */
+body.hiragana {
+  --accent: #7c5cff;
+  --accent-2: #2bd4d7;
+  --accent-shadow: rgba(124, 92, 255, 0.18);
+  --active-bg: linear-gradient(135deg, rgba(124,92,255,0.15), rgba(43,212,215,0.15));
+  --active-border: rgba(124,92,255,0.3);
+  --page-bg: linear-gradient(180deg, #12061e 0%, #0c122a 100%);
+}
+
+/* 🟢 KATAKANA (green-dark green) */
+body.katakana {
+  --accent: #22c55e;
+  --accent-2: #166534;
+  --accent-shadow: rgba(22,163,74,0.25);
+  --active-bg: linear-gradient(135deg, rgba(34,197,94,0.15), rgba(22,163,74,0.15));
+  --active-border: rgba(34,197,94,0.3);
+  --page-bg: linear-gradient(180deg, #061b0f 0%, #05270d 100%);
+}
+
+/* 🌸 KANJI (sakura pink) */
+body.kanji {
+  --accent: #ec4899;
+  --accent-2: #be185d;
+  --accent-shadow: rgba(236,72,153,0.25);
+  --active-bg: linear-gradient(135deg, rgba(236,72,153,0.15), rgba(190,24,93,0.15));
+  --active-border: rgba(236,72,153,0.3);
+  --page-bg: linear-gradient(180deg, #2e0614 0%, #3a0a1c 100%);
+}
+
+/* ========== GLOBAL STYLES ========== */
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Inter, system-ui, "Noto Sans JP", sans-serif;
+  color: #eaf2ff;
+  -webkit-font-smoothing: antialiased;
+  background: var(--page-bg);
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ========== MENU PAGE ========== */
+
+.menu {
+  max-width: 880px;
+  margin: 80px auto;
+  text-align: center;
+}
+.menu h1 { font-size: 34px; margin-bottom: 8px; }
+.menu-grid {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin: 20px 0;
+}
+.card {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 120px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  box-shadow: 0 12px 30px var(--accent-shadow);
+  border: 1px solid rgba(255,255,255,0.04);
+  transition: transform .2s ease, box-shadow .3s ease;
+}
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 16px 40px var(--accent-shadow);
+}
+.card.muted {
+  opacity: 0.5;
+  filter: grayscale(50%);
+}
+.note { color: var(--muted); margin-top: 12px; }
+
+/* ========== GAME PAGE ========== */
+
+.game-wrap { max-width: 900px; margin: 36px auto; padding: 16px; }
+.topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.topbar h1 { font-size: 20px; margin: 0; }
+.topbar .back { color: var(--muted); font-size: 14px; margin-right: 12px; }
+.meta { display: flex; gap: 12px; align-items: center; }
+.meta-item {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.04);
+  padding: 8px 12px;
+  border-radius: 10px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.game-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 14px;
+  padding: 28px;
+  border: 1px solid rgba(255,255,255,0.03);
+  box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+}
+.start-msg {
+  margin: 0 0 12px 0;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ========== WORD AREA ========== */
+
+.word-line {
+  min-height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  line-height: 1.6;
+  font-size: 48px;
+  letter-spacing: 0.02em;
+}
+
+.word-item {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: all .2s ease;
+}
+
+.word-item.active-word {
+  background: var(--active-bg);
+  border: 2px solid var(--active-border);
+  transform: scale(1.05);
+}
+.word-item.word-completed { opacity: 0.4; }
+
+.word-line span span {
+  padding: 2px;
+  transition: all .12s ease;
+  border-radius: 4px;
+}
+
+/* char state colors */
+.correct {
+  color: var(--success);
+  background: rgba(34,197,94,0.08);
+}
+.incorrect {
+  color: var(--danger);
+  background: rgba(255,107,107,0.12);
+}
+.pending {
+  color: var(--muted);
+  opacity: 0.6;
+}
+.completed {
+  color: var(--success);
+  opacity: 0.5;
+}
+
+/* ========== INPUT AREA ========== */
+
+.typed-area {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.typed-box {
+  min-height: 36px;
+  color: var(--muted);
+  font-size: 20px;
+}
+.romaji-input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.04);
+  background: transparent;
+  color: #eaf2ff;
+  font-size: 18px;
+  outline: none;
+  text-align: center;
+}
+.romaji-input:disabled { opacity: 0.6; }
+
+.help { margin-top: 14px; color: var(--muted); text-align: center; }
+kbd {
+  background: #0e091f;
+  border-radius: 6px;
+  padding: 4px 8px;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+/* ========== RESPONSIVE ========== */
+
+@media (max-width:520px) {
+  .word-line { font-size: 32px; }
+  .word-line span { font-size: inherit; }
+  .romaji-input { font-size: 16px; }
+  .meta { flex-direction: column; gap: 6px; }
+}

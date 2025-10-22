@@ -1,0 +1,51 @@
+[
+  {
+    "type": "single",
+    "kanji": "学",
+    "onyomi": ["ガク"],
+    "kunyomi": ["まな.ぶ"]
+  },
+{
+    "type": "single",
+    "kanji": "生",
+    "onyomi": ["セイ", "ショウ"],
+    "kunyomi": ["い.きる", "う.まれる", "なま"]
+  },
+  {
+    "type": "word",
+    "kanji": "学生",
+    "reading": ["がくせい"]
+  },
+  {
+    "type": "word",
+    "kanji": "日本",
+    "reading": ["にほん", "にっぽん"]
+  },
+  {
+    "type": "word",
+    "kanji": "火山",
+    "reading": ["かざん"]
+  },
+  {
+    "type": "word",
+    "kanji": "大人",
+    "reading": ["おとな"]
+  },
+  {
+    "type": "single",
+    "kanji": "人",
+    "onyomi": ["ジン", "ニン"],
+    "kunyomi": ["ひと"]
+  },
+  {
+    "type": "single",
+    "kanji": "水",
+    "onyomi": ["スイ"],
+    "kunyomi": ["みず"]
+  },
+  {
+    "type": "word",
+    "kanji": "水曜日",
+    "reading": ["すいようび"]
+  }
+]
