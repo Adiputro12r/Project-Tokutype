@@ -229,3 +229,61 @@ kbd {
   .romaji-input { font-size: 16px; }
   .meta { flex-direction: column; gap: 6px; }
 }
+/* ========================================
+   KANJI GAME — FURIGANA STYLING
+   ======================================== */
+body.kanji ruby {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 8px;
+}
+
+body.kanji rb {
+  font-size: 48px;
+  line-height: 1.2;
+}
+
+body.kanji rt {
+  font-size: 18px;
+  line-height: 1.2;
+  color: var(--muted);
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+/* Warna per status */
+.partial-correct {
+  color: var(--success);
+  opacity: 0.8;
+}
+
+.complete-correct,
+.correct {
+  color: var(--success);
+  text-shadow: 0 0 6px rgba(34, 197, 94, 0.5);
+}
+
+.incorrect {
+  color: var(--danger);
+  text-shadow: 0 0 6px rgba(255, 107, 107, 0.5);
+}
+
+.pending {
+  color: var(--muted);
+  opacity: 0.6;
+}
+
+.done-word rt {
+  color: var(--success);
+  opacity: 0.6;
+}
+
+.word-item.active-word {
+  background: var(--active-bg);
+  border: 2px solid var(--active-border);
+  border-radius: 8px;
+  padding: 6px 10px;
+  transform: scale(1.05);
+  transition: all 0.2s ease;
+}

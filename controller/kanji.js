@@ -26,7 +26,7 @@ game.allData = [];
 game.batchAnswers = [];
 game.currentCharIndex = 0;
 
-// Load kanji data
+// 🔹 Load kanji data
 game.setHooks({
   loadWords: async () => {
     const res = await fetch("../../database/kanji.json");
@@ -37,7 +37,7 @@ game.setHooks({
   convertInput: (raw) => toHiragana(raw),
 });
 
-// Helper: ambil bacaan hiragana per kanji
+// 🔹 Helper untuk memilih bacaan hiragana
 function getKanjiReadings(item) {
   if (item.type === "single") {
     const pools = [];
@@ -53,7 +53,7 @@ function getKanjiReadings(item) {
   return [];
 }
 
-// Override batch untuk kanji dengan ruby
+// 🔹 Override batch renderer agar bisa menampilkan <ruby>
 game._pickBatch = function () {
   const pool = [...this.allData].sort(() => Math.random() - 0.5);
   const selected = pool.slice(0, Math.min(this.batchSize, pool.length));
@@ -67,7 +67,7 @@ game._pickBatch = function () {
 
   this.currentIndex = 0;
 
-  // Render <ruby> dengan hiragana reading
+  // render <ruby>
   const html = selected.map((item, idx) => {
     const readings = this.batchAnswers[idx].readings;
     const cls = idx === 0 ? "active-word" : "";
@@ -83,52 +83,74 @@ game._pickBatch = function () {
   this.typedBox.innerHTML = "";
 };
 
-// Input handler khusus untuk kanji
+// 🔹 Input handler dengan warna dinamis
 inputEl.addEventListener("input", () => {
   if (!game.gameStarted || game.gameOverState) return;
-  
+
   const converted = toHiragana(inputEl.value);
   const wordData = game.batchAnswers[game.currentIndex];
   if (!wordData) return;
 
-  // Ambil reading yang sesuai
   const currentWordElement = document.querySelector('.word-item.active-word');
   const displayedReading = currentWordElement 
     ? currentWordElement.getAttribute('data-reading') 
     : wordData.readings[0];
-  
+
   const fullTarget = displayedReading;
+  const isCompleteAndCorrect = converted === fullTarget;
 
-  // Tampilkan progress typing di typedBox
+  // tampilkan di typedBox
   let html = "";
-  let isAllCorrect = true;
-
   for (let i = 0; i < fullTarget.length; i++) {
     const typed = converted[i];
     const correct = fullTarget[i];
     
-    if (typed !== undefined) {
-      if (typed === correct) {
-        html += `<span class="correct">${typed}</span>`;
-      } else {
-        html += `<span class="incorrect">${typed}</span>`;
-        isAllCorrect = false;
-      }
+    if (typed === correct) {
+      const cssClass = isCompleteAndCorrect ? "complete-correct" : "partial-correct";
+      html += `<span class="${cssClass}">${typed}</span>`;
+    } else if (typed !== undefined) {
+      html += `<span class="incorrect">${typed}</span>`;
     } else {
       html += `<span class="pending">${correct}</span>`;
-      isAllCorrect = false;
+    }
+  }
+  typedBox.innerHTML = html;
+
+  // update furigana warna per karakter
+  if (currentWordElement) {
+    const rubyRT = currentWordElement.querySelector('rt');
+    if (rubyRT) {
+      let rtHTML = "";
+      for (let i = 0; i < fullTarget.length; i++) {
+        const typed = converted[i];
+        const correct = fullTarget[i];
+        
+        if (typed === correct) {
+          const cssClass = isCompleteAndCorrect ? "complete-correct" : "partial-correct";
+          rtHTML += `<span class="${cssClass}">${correct}</span>`;
+        } else if (typed !== undefined) {
+          rtHTML += `<span class="incorrect">${correct}</span>`;
+        } else {
+          rtHTML += `<span class="pending">${correct}</span>`;
+        }
+      }
+      rubyRT.innerHTML = rtHTML;
     }
   }
 
-  typedBox.innerHTML = html;
-
-  // Jika semua benar dan lengkap
-  if (isAllCorrect && converted === fullTarget) {
+  // ✅ Jika benar semua
+  if (isCompleteAndCorrect) {
     const items = document.querySelectorAll(".word-item");
-    if (items[game.currentIndex]) {
-      // Tandai sebagai done
-      items[game.currentIndex].classList.remove("active-word");
-      items[game.currentIndex].classList.add("done-word");
+    const current = items[game.currentIndex];
+    if (current) {
+      current.classList.remove("active-word");
+      current.classList.add("done-word");
+
+      const rubyRT = current.querySelector('rt');
+      if (rubyRT) {
+        rubyRT.innerHTML = fullTarget.split('')
+          .map(ch => `<span class="correct">${ch}</span>`).join('');
+      }
     }
 
     game.score++;
@@ -137,75 +159,15 @@ inputEl.addEventListener("input", () => {
     inputEl.value = "";
     typedBox.innerHTML = "";
 
-    // Jika batch selesai, ambil batch baru
     if (game.currentIndex >= game.batchAnswers.length) {
       game._pickBatch();
     } else {
-      // Aktifkan kata berikutnya
       items[game.currentIndex].classList.add("active-word");
     }
   }
 });
 
-// Override _startGame untuk memastikan batch dimuat
-game._startGame = function() {
-  if (this.interval) return;
-  
-  this.gameStarted = true;
-  this.gameOverState = false;
-  this.score = 0;
-  this.time = this.initialTime;
-  
-  this._updateScore();
-  this._updateTime();
-  
-  this._pickBatch();
-  
-  this.inputEl.disabled = false;
-  this.inputEl.value = "";
-  this.typedBox.innerHTML = "";
-  this.startMsg.style.display = "none";
-  
-  this.inputEl.focus();
-  
-  clearInterval(this.interval);
-  this.interval = setInterval(() => {
-    this.time--;
-    this.timeEl.textContent = this.time;
-    
-    // Update WPM
-    const minutes = (this.initialTime - this.time) / 60;
-    this.wpmEl.textContent = minutes > 0 ? Math.round(this.score / minutes) : 0;
-    
-    if (this.time <= 0) {
-      this._gameOver();
-    }
-  }, 1000);
-};
-
-// Override start untuk menggunakan _startGame yang baru
-game.start = function() {
-  if (!this.allData.length) return;
-  this._startGame();
-};
-
-// Override _gameOver
-game._gameOver = function() {
-  clearInterval(this.interval);
-  this.gameOverState = true;
-  this.gameStarted = false;
-  this.wordEl.innerHTML = `<div style="text-align: center; font-size: 32px; color: #667eea;">
-    <p>ゲームオーバー！ (Game Over)</p>
-    <p style="font-size: 24px; margin-top: 20px; color: #333;">
-      Final Score: <strong>${this.score}</strong> | WPM: <strong>${this.wpmEl.textContent}</strong>
-    </p>
-  </div>`;
-  this.inputEl.disabled = true;
-  this.startMsg.style.display = "block";
-  this.startMsg.textContent = "Press SPACE to restart";
-};
-
-// Initialize game
+// 🔹 Inisialisasi game (tanpa override apa pun)
 game.init().catch(err => {
   wordEl.textContent = "Failed to load kanji data.";
   console.error(err);
