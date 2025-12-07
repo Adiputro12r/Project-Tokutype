@@ -45,6 +45,7 @@ function getKanjiReadings(item) {
     if (item.kunyomi?.length) pools.push("kunyomi");
     const pick = pools[Math.floor(Math.random() * pools.length)];
     const reading = item[pick][Math.floor(Math.random() * item[pick].length)];
+    // Hapus titik dari Kunyomi untuk typing (misalnya "まな.ぶ" jadi "まなぶ")
     return [toHiragana(reading.replace(/\./g, ""))];
   } else if (item.type === "word" && item.reading?.length) {
     const reading = item.reading[Math.floor(Math.random() * item.reading.length)];
@@ -106,11 +107,13 @@ inputEl.addEventListener("input", () => {
     const correct = fullTarget[i];
     
     if (typed === correct) {
+      // Menggunakan complete-correct jika sudah selesai dan benar
       const cssClass = isCompleteAndCorrect ? "complete-correct" : "partial-correct";
       html += `<span class="${cssClass}">${typed}</span>`;
     } else if (typed !== undefined) {
       html += `<span class="incorrect">${typed}</span>`;
     } else {
+      // Karakter yang belum diketik
       html += `<span class="pending">${correct}</span>`;
     }
   }
@@ -126,6 +129,7 @@ inputEl.addEventListener("input", () => {
         const correct = fullTarget[i];
         
         if (typed === correct) {
+          // Menggunakan complete-correct jika sudah selesai dan benar
           const cssClass = isCompleteAndCorrect ? "complete-correct" : "partial-correct";
           rtHTML += `<span class="${cssClass}">${correct}</span>`;
         } else if (typed !== undefined) {
@@ -138,14 +142,20 @@ inputEl.addEventListener("input", () => {
     }
   }
 
-  // ✅ Jika benar semua
+  // ✅ Jika benar semua (Perbaikan Logika Warna Final)
   if (isCompleteAndCorrect) {
     const items = document.querySelectorAll(".word-item");
     const current = items[game.currentIndex];
+    
+    // 🌟 PERBAIKAN 1: Pastikan typedBox memiliki warna 'correct' final sebelum di-reset (opsional, tapi baik untuk feedback visual sesaat)
+    typedBox.innerHTML = fullTarget.split('')
+      .map(ch => `<span class="correct">${ch}</span>`).join('');
+      
     if (current) {
       current.classList.remove("active-word");
       current.classList.add("done-word");
 
+      // 🌟 PERBAIKAN 2: Pastikan furigana (rt) diset ke warna 'correct' final (hijau)
       const rubyRT = current.querySelector('rt');
       if (rubyRT) {
         rubyRT.innerHTML = fullTarget.split('')
@@ -156,8 +166,10 @@ inputEl.addEventListener("input", () => {
     game.score++;
     game._updateScore();
     game.currentIndex++;
+    
+    // Reset input dan typedBox BARU setelah memberikan feedback visual
     inputEl.value = "";
-    typedBox.innerHTML = "";
+    typedBox.innerHTML = ""; 
 
     if (game.currentIndex >= game.batchAnswers.length) {
       game._pickBatch();
@@ -167,7 +179,7 @@ inputEl.addEventListener("input", () => {
   }
 });
 
-// 🔹 Inisialisasi game (tanpa override apa pun)
+//  Inisialisasi game (tanpa override apa pun)
 game.init().catch(err => {
   wordEl.textContent = "Failed to load kanji data.";
   console.error(err);
