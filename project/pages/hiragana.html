@@ -3,14 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hiragana Typing Game</title>
+  <title>Hiragana Typing Game — Tokutype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles/base.css">
 </head>
 <body class="hiragana">
+
   <!-- NAVBAR -->
   <nav class="navbar">
     <div class="nav-container">
       <div class="nav-logo">Tokutype Hiragana Typing</div>
+      <button class="btn-show-table" id="btnShowTable" onclick="openKanaModal()">
+        📖 Lihat Tabel
+      </button>
     </div>
   </nav>
 
@@ -38,7 +45,289 @@
     </div>
   </div>
 
+  <!-- =============================================
+       HIRAGANA TABLE MODAL POPUP
+       ============================================= -->
+  <div id="kanaModal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Tabel Hiragana">
+    <div class="modal-box theme-hiragana">
+
+      <!-- Header -->
+      <div class="modal-header">
+        <div>
+          <div class="modal-title">Tabel Hiragana (平仮名)</div>
+          <div class="modal-subtitle">46 karakter dasar · dakuten · kombinasi youon</div>
+        </div>
+        <button class="modal-close" onclick="closeKanaModal()" aria-label="Tutup">&times;</button>
+      </div>
+
+      <div class="modal-body">
+
+        <!-- ① KARAKTER DASAR -->
+        <div class="kana-section">
+          <div class="kana-section-title">① Karakter Dasar — Gojuuon (五十音)</div>
+          <div class="kana-table-scroll">
+            <table class="kana-table">
+              <thead>
+                <tr>
+                  <th class="row-header"></th>
+                  <th>a</th><th>i</th><th>u</th><th>e</th><th>o</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th class="row-header">—</th>
+                  <td class="kana-cell"><span class="kana-char">あ</span><span class="kana-romaji">a</span></td>
+                  <td class="kana-cell"><span class="kana-char">い</span><span class="kana-romaji">i</span></td>
+                  <td class="kana-cell"><span class="kana-char">う</span><span class="kana-romaji">u</span></td>
+                  <td class="kana-cell"><span class="kana-char">え</span><span class="kana-romaji">e</span></td>
+                  <td class="kana-cell"><span class="kana-char">お</span><span class="kana-romaji">o</span></td>
+                </tr>
+                <tr>
+                  <th class="row-header">k</th>
+                  <td class="kana-cell"><span class="kana-char">か</span><span class="kana-romaji">ka</span></td>
+                  <td class="kana-cell"><span class="kana-char">き</span><span class="kana-romaji">ki</span></td>
+                  <td class="kana-cell"><span class="kana-char">く</span><span class="kana-romaji">ku</span></td>
+                  <td class="kana-cell"><span class="kana-char">け</span><span class="kana-romaji">ke</span></td>
+                  <td class="kana-cell"><span class="kana-char">こ</span><span class="kana-romaji">ko</span></td>
+                </tr>
+                <tr>
+                  <th class="row-header">s</th>
+                  <td class="kana-cell"><span class="kana-char">さ</span><span class="kana-romaji">sa</span></td>
+                  <td class="kana-cell"><span class="kana-char">し</span><span class="kana-romaji">shi</span></td>
+                  <td class="kana-cell"><span class="kana-char">す</span><span class="kana-romaji">su</span></td>
+                  <td class="kana-cell"><span class="kana-char">せ</span><span class="kana-romaji">se</span></td>
+                  <td class="kana-cell"><span class="kana-char">そ</span><span class="kana-romaji">so</span></td>
+                </tr>
+                <tr>
+                  <th class="row-header">t</th>
+                  <td class="kana-cell"><span class="kana-char">た</span><span class="kana-romaji">ta</span></td>
+                  <td class="kana-cell"><span class="kana-char">ち</span><span class="kana-romaji">chi</span></td>
+                  <td class="kana-cell"><span class="kana-char">つ</span><span class="kana-romaji">tsu</span></td>
+                  <td class="kana-cell"><span class="kana-char">て</span><span class="kana-romaji">te</span></td>
+                  <td class="kana-cell"><span class="kana-char">と</span><span class="kana-romaji">to</span></td>
+                </tr>
+                <tr>
+                  <th class="row-header">n</th>
+                  <td class="kana-cell"><span class="kana-char">な</span><span class="kana-romaji">na</span></td>
+                  <td class="kana-cell"><span class="kana-char">に</span><span class="kana-romaji">ni</span></td>
+                  <td class="kana-cell"><span class="kana-char">ぬ</span><span class="kana-romaji">nu</span></td>
+                  <td class="kana-cell"><span class="kana-char">ね</span><span class="kana-romaji">ne</span></td>
+                  <td class="kana-cell"><span class="kana-char">の</span><span class="kana-romaji">no</span></td>
+                </tr>
+                <tr>
+                  <th class="row-header">h</th>
+                  <td class="kana-cell"><span class="kana-char">は</span><span class="kana-romaji">ha</span></td>
+                  <td class="kana-cell"><span class="kana-char">ひ</span><span class="kana-romaji">hi</span></td>
+                  <td class="kana-cell"><span class="kana-char">ふ</span><span class="kana-romaji">fu</span></td>
+                  <td class="kana-cell"><span class="kana-char">へ</span><span class="kana-romaji">he</span></td>
+                  <td class="kana-cell"><span class="kana-char">ほ</span><span class="kana-romaji">ho</span></td>
+                </tr>
+                <tr>
+                  <th class="row-header">m</th>
+                  <td class="kana-cell"><span class="kana-char">ま</span><span class="kana-romaji">ma</span></td>
+                  <td class="kana-cell"><span class="kana-char">み</span><span class="kana-romaji">mi</span></td>
+                  <td class="kana-cell"><span class="kana-char">む</span><span class="kana-romaji">mu</span></td>
+                  <td class="kana-cell"><span class="kana-char">め</span><span class="kana-romaji">me</span></td>
+                  <td class="kana-cell"><span class="kana-char">も</span><span class="kana-romaji">mo</span></td>
+                </tr>
+                <tr>
+                  <th class="row-header">y</th>
+                  <td class="kana-cell"><span class="kana-char">や</span><span class="kana-romaji">ya</span></td>
+                  <td class="kana-cell kana-empty"></td>
+                  <td class="kana-cell"><span class="kana-char">ゆ</span><span class="kana-romaji">yu</span></td>
+                  <td class="kana-cell kana-empty"></td>
+                  <td class="kana-cell"><span class="kana-char">よ</span><span class="kana-romaji">yo</span></td>
+                </tr>
+                <tr>
+                  <th class="row-header">r</th>
+                  <td class="kana-cell"><span class="kana-char">ら</span><span class="kana-romaji">ra</span></td>
+                  <td class="kana-cell"><span class="kana-char">り</span><span class="kana-romaji">ri</span></td>
+                  <td class="kana-cell"><span class="kana-char">る</span><span class="kana-romaji">ru</span></td>
+                  <td class="kana-cell"><span class="kana-char">れ</span><span class="kana-romaji">re</span></td>
+                  <td class="kana-cell"><span class="kana-char">ろ</span><span class="kana-romaji">ro</span></td>
+                </tr>
+                <tr>
+                  <th class="row-header">w</th>
+                  <td class="kana-cell"><span class="kana-char">わ</span><span class="kana-romaji">wa</span></td>
+                  <td class="kana-cell kana-empty"></td>
+                  <td class="kana-cell kana-empty"></td>
+                  <td class="kana-cell kana-empty"></td>
+                  <td class="kana-cell"><span class="kana-char">を</span><span class="kana-romaji">wo</span></td>
+                </tr>
+                <tr>
+                  <th class="row-header">n</th>
+                  <td class="kana-cell"><span class="kana-char">ん</span><span class="kana-romaji">n</span></td>
+                  <td class="kana-cell kana-empty"></td>
+                  <td class="kana-cell kana-empty"></td>
+                  <td class="kana-cell kana-empty"></td>
+                  <td class="kana-cell kana-empty"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ② DAKUTEN & HANDAKUTEN -->
+        <div class="kana-section">
+          <div class="kana-section-title">② Dakuten ゛ &amp; Handakuten ゜ — Suara Bersuara</div>
+          <div class="kana-table-scroll">
+            <table class="kana-table">
+              <thead>
+                <tr>
+                  <th class="row-header"></th>
+                  <th>a</th><th>i</th><th>u</th><th>e</th><th>o</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th class="row-header">g</th>
+                  <td class="kana-cell"><span class="kana-char">が</span><span class="kana-romaji">ga</span></td>
+                  <td class="kana-cell"><span class="kana-char">ぎ</span><span class="kana-romaji">gi</span></td>
+                  <td class="kana-cell"><span class="kana-char">ぐ</span><span class="kana-romaji">gu</span></td>
+                  <td class="kana-cell"><span class="kana-char">げ</span><span class="kana-romaji">ge</span></td>
+                  <td class="kana-cell"><span class="kana-char">ご</span><span class="kana-romaji">go</span></td>
+                </tr>
+                <tr>
+                  <th class="row-header">z</th>
+                  <td class="kana-cell"><span class="kana-char">ざ</span><span class="kana-romaji">za</span></td>
+                  <td class="kana-cell"><span class="kana-char">じ</span><span class="kana-romaji">ji</span></td>
+                  <td class="kana-cell"><span class="kana-char">ず</span><span class="kana-romaji">zu</span></td>
+                  <td class="kana-cell"><span class="kana-char">ぜ</span><span class="kana-romaji">ze</span></td>
+                  <td class="kana-cell"><span class="kana-char">ぞ</span><span class="kana-romaji">zo</span></td>
+                </tr>
+                <tr>
+                  <th class="row-header">d</th>
+                  <td class="kana-cell"><span class="kana-char">だ</span><span class="kana-romaji">da</span></td>
+                  <td class="kana-cell"><span class="kana-char">ぢ</span><span class="kana-romaji">ji</span></td>
+                  <td class="kana-cell"><span class="kana-char">づ</span><span class="kana-romaji">zu</span></td>
+                  <td class="kana-cell"><span class="kana-char">で</span><span class="kana-romaji">de</span></td>
+                  <td class="kana-cell"><span class="kana-char">ど</span><span class="kana-romaji">do</span></td>
+                </tr>
+                <tr>
+                  <th class="row-header">b</th>
+                  <td class="kana-cell"><span class="kana-char">ば</span><span class="kana-romaji">ba</span></td>
+                  <td class="kana-cell"><span class="kana-char">び</span><span class="kana-romaji">bi</span></td>
+                  <td class="kana-cell"><span class="kana-char">ぶ</span><span class="kana-romaji">bu</span></td>
+                  <td class="kana-cell"><span class="kana-char">べ</span><span class="kana-romaji">be</span></td>
+                  <td class="kana-cell"><span class="kana-char">ぼ</span><span class="kana-romaji">bo</span></td>
+                </tr>
+                <tr>
+                  <th class="row-header">p</th>
+                  <td class="kana-cell"><span class="kana-char">ぱ</span><span class="kana-romaji">pa</span></td>
+                  <td class="kana-cell"><span class="kana-char">ぴ</span><span class="kana-romaji">pi</span></td>
+                  <td class="kana-cell"><span class="kana-char">ぷ</span><span class="kana-romaji">pu</span></td>
+                  <td class="kana-cell"><span class="kana-char">ぺ</span><span class="kana-romaji">pe</span></td>
+                  <td class="kana-cell"><span class="kana-char">ぽ</span><span class="kana-romaji">po</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ③ KOMBINASI / YOUON -->
+        <div class="kana-section">
+          <div class="kana-section-title">③ Kombinasi Youon (拗音) — Bunyi Gabungan</div>
+          <div class="kana-table-scroll">
+            <table class="kana-table">
+              <thead>
+                <tr>
+                  <th class="row-header"></th>
+                  <th>ya</th><th>yu</th><th>yo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th class="row-header">ky</th>
+                  <td class="kana-cell kana-combo"><span class="kana-char">きゃ</span><span class="kana-romaji">kya</span></td>
+                  <td class="kana-cell kana-combo"><span class="kana-char">きゅ</span><span class="kana-romaji">kyu</span></td>
+                  <td class="kana-cell kana-combo"><span class="kana-char">きょ</span><span class="kana-romaji">kyo</span></td>
+                </tr>
+                <tr>
+                  <th class="row-header">sh</th>
+                  <td class="kana-cell kana-combo"><span class="kana-char">しゃ</span><span class="kana-romaji">sha</span></td>
+                  <td class="kana-cell kana-combo"><span class="kana-char">しゅ</span><span class="kana-romaji">shu</span></td>
+                  <td class="kana-cell kana-combo"><span class="kana-char">しょ</span><span class="kana-romaji">sho</span></td>
+                </tr>
+                <tr>
+                  <th class="row-header">ch</th>
+                  <td class="kana-cell kana-combo"><span class="kana-char">ちゃ</span><span class="kana-romaji">cha</span></td>
+                  <td class="kana-cell kana-combo"><span class="kana-char">ちゅ</span><span class="kana-romaji">chu</span></td>
+                  <td class="kana-cell kana-combo"><span class="kana-char">ちょ</span><span class="kana-romaji">cho</span></td>
+                </tr>
+                <tr>
+                  <th class="row-header">ny</th>
+                  <td class="kana-cell kana-combo"><span class="kana-char">にゃ</span><span class="kana-romaji">nya</span></td>
+                  <td class="kana-cell kana-combo"><span class="kana-char">にゅ</span><span class="kana-romaji">nyu</span></td>
+                  <td class="kana-cell kana-combo"><span class="kana-char">にょ</span><span class="kana-romaji">nyo</span></td>
+                </tr>
+                <tr>
+                  <th class="row-header">hy</th>
+                  <td class="kana-cell kana-combo"><span class="kana-char">ひゃ</span><span class="kana-romaji">hya</span></td>
+                  <td class="kana-cell kana-combo"><span class="kana-char">ひゅ</span><span class="kana-romaji">hyu</span></td>
+                  <td class="kana-cell kana-combo"><span class="kana-char">ひょ</span><span class="kana-romaji">hyo</span></td>
+                </tr>
+                <tr>
+                  <th class="row-header">my</th>
+                  <td class="kana-cell kana-combo"><span class="kana-char">みゃ</span><span class="kana-romaji">mya</span></td>
+                  <td class="kana-cell kana-combo"><span class="kana-char">みゅ</span><span class="kana-romaji">myu</span></td>
+                  <td class="kana-cell kana-combo"><span class="kana-char">みょ</span><span class="kana-romaji">myo</span></td>
+                </tr>
+                <tr>
+                  <th class="row-header">ry</th>
+                  <td class="kana-cell kana-combo"><span class="kana-char">りゃ</span><span class="kana-romaji">rya</span></td>
+                  <td class="kana-cell kana-combo"><span class="kana-char">りゅ</span><span class="kana-romaji">ryu</span></td>
+                  <td class="kana-cell kana-combo"><span class="kana-char">りょ</span><span class="kana-romaji">ryo</span></td>
+                </tr>
+                <tr>
+                  <th class="row-header">gy</th>
+                  <td class="kana-cell kana-combo"><span class="kana-char">ぎゃ</span><span class="kana-romaji">gya</span></td>
+                  <td class="kana-cell kana-combo"><span class="kana-char">ぎゅ</span><span class="kana-romaji">gyu</span></td>
+                  <td class="kana-cell kana-combo"><span class="kana-char">ぎょ</span><span class="kana-romaji">gyo</span></td>
+                </tr>
+                <tr>
+                  <th class="row-header">j</th>
+                  <td class="kana-cell kana-combo"><span class="kana-char">じゃ</span><span class="kana-romaji">ja</span></td>
+                  <td class="kana-cell kana-combo"><span class="kana-char">じゅ</span><span class="kana-romaji">ju</span></td>
+                  <td class="kana-cell kana-combo"><span class="kana-char">じょ</span><span class="kana-romaji">jo</span></td>
+                </tr>
+                <tr>
+                  <th class="row-header">by</th>
+                  <td class="kana-cell kana-combo"><span class="kana-char">びゃ</span><span class="kana-romaji">bya</span></td>
+                  <td class="kana-cell kana-combo"><span class="kana-char">びゅ</span><span class="kana-romaji">byu</span></td>
+                  <td class="kana-cell kana-combo"><span class="kana-char">びょ</span><span class="kana-romaji">byo</span></td>
+                </tr>
+                <tr>
+                  <th class="row-header">py</th>
+                  <td class="kana-cell kana-combo"><span class="kana-char">ぴゃ</span><span class="kana-romaji">pya</span></td>
+                  <td class="kana-cell kana-combo"><span class="kana-char">ぴゅ</span><span class="kana-romaji">pyu</span></td>
+                  <td class="kana-cell kana-combo"><span class="kana-char">ぴょ</span><span class="kana-romaji">pyo</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div><!-- /modal-body -->
+    </div><!-- /modal-box -->
+  </div><!-- /modal-overlay -->
+
   <script src="../../lib/wanakana.min.js"></script>
   <script type="module" src="../../controller/hiragana.js"></script>
+  <script>
+    function openKanaModal() {
+      document.getElementById('kanaModal').classList.add('active');
+      document.body.classList.add('modal-open');
+    }
+    function closeKanaModal() {
+      document.getElementById('kanaModal').classList.remove('active');
+      document.body.classList.remove('modal-open');
+    }
+    document.getElementById('kanaModal').addEventListener('click', function(e) {
+      if (e.target === this) closeKanaModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeKanaModal();
+    });
+  </script>
 </body>
 </html>

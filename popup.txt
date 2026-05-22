@@ -1,0 +1,557 @@
+
+============================================================
+  RENCANA IMPLEMENTASI POPUP & HALAMAN LEARNING
+  Project: Tokutype Typing Game
+  Dibuat: 2026-05-22  |  Diperbarui: 2026-05-22 v2
+============================================================
+
+════════════════════════════════════════════════════════════
+  BAGIAN 1 — POPUP TABEL DI HALAMAN QUIZ (hiragana & katakana)
+════════════════════════════════════════════════════════════
+
+📌 DESKRIPSI:
+  Pada halaman hiragana.html dan katakana.html akan ditambahkan:
+  - Sebuah button "📖 Lihat Tabel" di area topbar/navbar
+  - Ketika diklik → muncul MODAL POPUP FULL SCREEN berisi
+    tabel karakter LENGKAP sesuai halaman:
+      → hiragana.html  → tampilkan tabel Hiragana (tema ungu)
+      → katakana.html  → tampilkan tabel Katakana (tema hijau)
+  - Modal bisa ditutup dengan:
+      → Klik tombol ✕ (close)
+      → Klik area background luar modal (overlay)
+      → Tekan tombol Escape di keyboard
+  - Warna tema popup MENYESUAIKAN halaman:
+      → hiragana.html → header ungu, border ungu, accent ungu
+      → katakana.html → header hijau, border hijau, accent hijau
+
+════════════════════════════════════════════════════════════
+📌 STRUKTUR TABEL LENGKAP (mengacu gambar referensi)
+════════════════════════════════════════════════════════════
+
+Setiap popup TERDIRI DARI 3 SUB-TABEL yang disusun:
+  [Sub-tabel 1] DASAR    | [Sub-tabel 3] KOMBINASI (Youon)
+  [Sub-tabel 2] DAKUTEN  |
+
+──────────────────────────────────────────────────────────
+SUB-TABEL 1: KARAKTER DASAR (Gojuuon / 五十音)
+──────────────────────────────────────────────────────────
+Format kolom: [label baris] | a | i | u | e | o
+
+HIRAGANA DASAR:
+┌────┬────┬────┬────┬────┬────┐
+│    │  a │  i │  u │  e │  o │
+├────┼────┼────┼────┼────┼────┤
+│ -  │ あ │ い │ う │ え │ お │
+│    │ a  │ i  │ u  │ e  │ o  │
+├────┼────┼────┼────┼────┼────┤
+│ k  │ か │ き │ く │ け │ こ │
+│    │ ka │ ki │ ku │ ke │ ko │
+├────┼────┼────┼────┼────┼────┤
+│ s  │ さ │ し │ す │ せ │ そ │
+│    │ sa │shi │ su │ se │ so │
+├────┼────┼────┼────┼────┼────┤
+│ t  │ た │ ち │ つ │ て │ と │
+│    │ ta │chi │tsu │ te │ to │
+├────┼────┼────┼────┼────┼────┤
+│ n  │ な │ に │ ぬ │ ね │ の │
+│    │ na │ ni │ nu │ ne │ no │
+├────┼────┼────┼────┼────┼────┤
+│ h  │ は │ ひ │ ふ │ へ │ ほ │
+│    │ ha │ hi │ fu │ he │ ho │
+├────┼────┼────┼────┼────┼────┤
+│ m  │ ま │ み │ む │ め │ も │
+│    │ ma │ mi │ mu │ me │ mo │
+├────┼────┼────┼────┼────┼────┤
+│ y  │ や │    │ ゆ │    │ よ │
+│    │ ya │    │ yu │    │ yo │
+├────┼────┼────┼────┼────┼────┤
+│ r  │ ら │ り │ る │ れ │ ろ │
+│    │ ra │ ri │ ru │ re │ ro │
+├────┼────┼────┼────┼────┼────┤
+│ w  │ わ │    │    │    │ を │
+│    │ wa │    │    │    │ wo │
+├────┼────┴────┴────┴────┴────┤
+│ n  │ ん                      │
+│    │ n/nn                    │
+└────┴─────────────────────────┘
+
+KATAKANA DASAR (struktur sama, karakter berbeda):
+┌────┬────┬────┬────┬────┬────┐
+│    │  a │  i │  u │  e │  o │
+├────┼────┼────┼────┼────┼────┤
+│ -  │ ア │ イ │ ウ │ エ │ オ │
+│    │ a  │ i  │ u  │ e  │ o  │
+├────┼────┼────┼────┼────┼────┤
+│ k  │ カ │ キ │ ク │ ケ │ コ │
+│    │ ka │ ki │ ku │ ke │ ko │
+├────┼────┼────┼────┼────┼────┤
+│ s  │ サ │ シ │ ス │ セ │ ソ │
+│    │ sa │shi │ su │ se │ so │
+├────┼────┼────┼────┼────┼────┤
+│ t  │ タ │ チ │ ツ │ テ │ ト │
+│    │ ta │chi │tsu │ te │ to │
+├────┼────┼────┼────┼────┼────┤
+│ n  │ ナ │ ニ │ ヌ │ ネ │ ノ │
+│    │ na │ ni │ nu │ ne │ no │
+├────┼────┼────┼────┼────┼────┤
+│ h  │ ハ │ ヒ │ フ │ ヘ │ ホ │
+│    │ ha │ hi │ fu │ he │ ho │
+├────┼────┼────┼────┼────┼────┤
+│ m  │ マ │ ミ │ ム │ メ │ モ │
+│    │ ma │ mi │ mu │ me │ mo │
+├────┼────┼────┼────┼────┼────┤
+│ y  │ ヤ │    │ ユ │    │ ヨ │
+│    │ ya │    │ yu │    │ yo │
+├────┼────┼────┼────┼────┼────┤
+│ r  │ ラ │ リ │ ル │ レ │ ロ │
+│    │ ra │ ri │ ru │ re │ ro │
+├────┼────┼────┼────┼────┼────┤
+│ w  │ ワ │    │    │    │ ヲ │
+│    │ wa │    │    │    │ wo │
+├────┼────┴────┴────┴────┴────┤
+│ n  │ ン                      │
+│    │ n/nn                    │
+└────┴─────────────────────────┘
+
+──────────────────────────────────────────────────────────
+SUB-TABEL 2: DAKUTEN ゛& HANDAKUTEN ゜(Bersuara)
+──────────────────────────────────────────────────────────
+Dakuten (゛) = tanda 2 titik di kanan atas → suara bersuara
+Handakuten (゜) = tanda lingkaran kecil → khusus baris H→P
+
+HIRAGANA DAKUTEN:
+┌────┬────┬────┬────┬────┬────┐
+│    │  a │  i │  u │  e │  o │
+├────┼────┼────┼────┼────┼────┤
+│ g  │ が │ ぎ │ ぐ │ げ │ ご │
+│    │ ga │ gi │ gu │ ge │ go │
+├────┼────┼────┼────┼────┼────┤
+│ z  │ ざ │ じ │ ず │ ぜ │ ぞ │
+│    │ za │ ji │ zu │ ze │ zo │
+├────┼────┼────┼────┼────┼────┤
+│ d  │ だ │ ぢ │ づ │ で │ ど │
+│    │ da │ ji │ zu │ de │ do │
+├────┼────┼────┼────┼────┼────┤
+│ b  │ ば │ び │ ぶ │ べ │ ぼ │
+│    │ ba │ bi │ bu │ be │ bo │
+├────┼────┼────┼────┼────┼────┤
+│ p  │ ぱ │ ぴ │ ぷ │ ぺ │ ぽ │
+│    │ pa │ pi │ pu │ pe │ po │
+└────┴────┴────┴────┴────┴────┘
+
+KATAKANA DAKUTEN (struktur sama):
+┌────┬────┬────┬────┬────┬────┐
+│    │  a │  i │  u │  e │  o │
+├────┼────┼────┼────┼────┼────┤
+│ g  │ ガ │ ギ │ グ │ ゲ │ ゴ │
+│    │ ga │ gi │ gu │ ge │ go │
+├────┼────┼────┼────┼────┼────┤
+│ z  │ ザ │ ジ │ ズ │ ゼ │ ゾ │
+│    │ za │ ji │ zu │ ze │ zo │
+├────┼────┼────┼────┼────┼────┤
+│ d  │ ダ │ ヂ │ ヅ │ デ │ ド │
+│    │ da │ ji │ zu │ de │ do │
+├────┼────┼────┼────┼────┼────┤
+│ b  │ バ │ ビ │ ブ │ ベ │ ボ │
+│    │ ba │ bi │ bu │ be │ bo │
+├────┼────┼────┼────┼────┼────┤
+│ p  │ パ │ ピ │ プ │ ペ │ ポ │
+│    │ pa │ pi │ pu │ pe │ po │
+└────┴────┴────┴────┴────┴────┘
+
+──────────────────────────────────────────────────────────
+SUB-TABEL 3: KOMBINASI / YOUON (拗音) — Bunyi Gabungan
+──────────────────────────────────────────────────────────
+Kombinasi = karakter konsonan + kecil (ya/yu/yo)
+Contoh: き + ゃ = きゃ (kya)
+
+Format kolom: [label] | ya | yu | yo
+
+HIRAGANA KOMBINASI:
+┌─────┬─────┬─────┬─────┐
+│     │  ya │  yu │  yo │
+├─────┼─────┼─────┼─────┤
+│ ky  │ きゃ│ きゅ│ きょ│
+│     │ kya │ kyu │ kyo │
+├─────┼─────┼─────┼─────┤
+│ sh  │ しゃ│ しゅ│ しょ│
+│     │ sha │ shu │ sho │
+├─────┼─────┼─────┼─────┤
+│ ch  │ ちゃ│ ちゅ│ ちょ│
+│     │ cha │ chu │ cho │
+├─────┼─────┼─────┼─────┤
+│ ny  │ にゃ│ にゅ│ にょ│
+│     │ nya │ nyu │ nyo │
+├─────┼─────┼─────┼─────┤
+│ hy  │ ひゃ│ ひゅ│ ひょ│
+│     │ hya │ hyu │ hyo │
+├─────┼─────┼─────┼─────┤
+│ my  │ みゃ│ みゅ│ みょ│
+│     │ mya │ myu │ myo │
+├─────┼─────┼─────┼─────┤
+│ ry  │ りゃ│ りゅ│ りょ│
+│     │ rya │ ryu │ ryo │
+├─────┼─────┼─────┼─────┤
+│ gy  │ ぎゃ│ ぎゅ│ ぎょ│
+│     │ gya │ gyu │ gyo │
+├─────┼─────┼─────┼─────┤
+│ j   │ じゃ│ じゅ│ じょ│
+│     │ ja  │ ju  │ jo  │
+├─────┼─────┼─────┼─────┤
+│ by  │ びゃ│ びゅ│ びょ│
+│     │ bya │ byu │ byo │
+├─────┼─────┼─────┼─────┤
+│ py  │ ぴゃ│ ぴゅ│ ぴょ│
+│     │ pya │ pyu │ pyo │
+└─────┴─────┴─────┴─────┘
+
+KATAKANA KOMBINASI (struktur sama, karakter berbeda):
+┌─────┬─────┬─────┬─────┐
+│     │  ya │  yu │  yo │
+├─────┼─────┼─────┼─────┤
+│ ky  │ キャ│ キュ│ キョ│
+│     │ kya │ kyu │ kyo │
+├─────┼─────┼─────┼─────┤
+│ sh  │ シャ│ シュ│ ショ│
+│     │ sha │ shu │ sho │
+├─────┼─────┼─────┼─────┤
+│ ch  │ チャ│ チュ│ チョ│
+│     │ cha │ chu │ cho │
+├─────┼─────┼─────┼─────┤
+│ ny  │ ニャ│ ニュ│ ニョ│
+│     │ nya │ nyu │ nyo │
+├─────┼─────┼─────┼─────┤
+│ hy  │ ヒャ│ ヒュ│ ヒョ│
+│     │ hya │ hyu │ hyo │
+├─────┼─────┼─────┼─────┤
+│ my  │ ミャ│ ミュ│ ミョ│
+│     │ mya │ myu │ myo │
+├─────┼─────┼─────┼─────┤
+│ ry  │ リャ│ リュ│ リョ│
+│     │ rya │ ryu │ ryo │
+├─────┼─────┼─────┼─────┤
+│ gy  │ ギャ│ ギュ│ ギョ│
+│     │ gya │ gyu │ gyo │
+├─────┼─────┼─────┼─────┤
+│ j   │ ジャ│ ジュ│ ジョ│
+│     │ ja  │ ju  │ jo  │
+├─────┼─────┼─────┼─────┤
+│ by  │ ビャ│ ビュ│ ビョ│
+│     │ bya │ byu │ byo │
+├─────┼─────┼─────┼─────┤
+│ py  │ ピャ│ ピュ│ ピョ│
+│     │ pya │ pyu │ pyo │
+└─────┴─────┴─────┴─────┘
+
+══════════════════════════════════════════════════════
+📌 DESAIN SEL TABEL (setiap .kana-cell):
+══════════════════════════════════════════════════════
+  ┌──────────┐
+  │   あ     │   ← karakter besar (font-size ~26-30px)
+  │   a      │   ← romaji kecil di bawah (font-size ~11px)
+  └──────────┘
+
+  - Hover effect: background glow sesuai tema (--accent)
+  - Sel kosong (ya, wi, we dll): background abu-abu gelap
+  - Kombinasi: karakter utama besar + karakter kecil (ゃ) lebih kecil
+
+══════════════════════════════════════════════════════
+📌 LAYOUT POPUP MODAL:
+══════════════════════════════════════════════════════
+  ┌──────────────────────────────────────────────────────┐
+  │ [Judul: Tabel Hiragana 平仮名]               [✕ tutup]│
+  ├──────────────────────────────────────────────────────┤
+  │  [TAB: Dasar] [TAB: Dakuten] [TAB: Kombinasi]        │
+  ├──────────────────────────────────────────────────────┤
+  │                                                       │
+  │   SUB-TABEL (sesuai tab aktif)                       │
+  │   - Header kolom: a  i  u  e  o                      │
+  │   - Header baris: k, s, t, n, h, m, y, r, w, n      │
+  │   - Setiap sel: karakter + romaji                    │
+  │                                                       │
+  └──────────────────────────────────────────────────────┘
+
+  ALTERNATIF LAYOUT (tanpa tab):
+  Popup menampilkan SEMUA 3 tabel sekaligus secara vertikal
+  dengan sub-judul pemisah antar tabel:
+  ┌─────────────────────────┐
+  │ === Karakter Dasar ===  │ ← sub-header dengan garis aksen
+  │ [tabel dasar]           │
+  │                         │
+  │ === Dakuten & Handak. ==│
+  │ [tabel dakuten]         │
+  │                         │
+  │ === Kombinasi (Youon) ==│
+  │ [tabel kombinasi]       │
+  └─────────────────────────┘
+  → REKOMENDASI: gunakan LAYOUT TANPA TAB tapi scrollable
+    agar semua informasi langsung terlihat.
+
+📌 WARNA TEMA PER HALAMAN:
+  hiragana.html popup:
+    - Header gradient: linear-gradient(135deg, #7c5cff, #2bd4d7)
+    - Border sel hover: rgba(124, 92, 255, 0.6)
+    - Background sel hover: rgba(124, 92, 255, 0.15)
+    - Sub-header garis: border-left: 4px solid #7c5cff
+    - Badge label: background rgba(124,92,255,0.2), color #a78bfa
+
+  katakana.html popup:
+    - Header gradient: linear-gradient(135deg, #22c55e, #166534)
+    - Border sel hover: rgba(34, 197, 94, 0.6)
+    - Background sel hover: rgba(34, 197, 94, 0.15)
+    - Sub-header garis: border-left: 4px solid #22c55e
+    - Badge label: background rgba(34,197,94,0.2), color #86efac
+
+📌 FILE YANG DIUBAH (Bagian 1):
+  1. project/pages/hiragana.html
+     - Tambah button "📖 Tabel" di nav-container (navbar kanan)
+     - Tambah <div id="kanaModal" class="modal-overlay"> sebelum </body>
+       Isi: 3 sub-tabel lengkap hiragana (dasar + dakuten + kombinasi)
+     - Tambah <script> inline untuk toggle modal + keyboard shortcut
+
+  2. project/pages/katakana.html
+     - Sama persis seperti hiragana.html tapi isi tabel katakana
+     - Tema warna hijau
+
+  3. project/styles/base.css
+     - Tambah CSS baru:
+       .btn-show-table    → tombol "Lihat Tabel" di navbar
+       .modal-overlay     → fullscreen dark background
+       .modal-box         → kotak modal utama, max-width 900px, scrollable
+       .modal-header      → flex row: judul + tombol close
+       .modal-close       → tombol × (kanan atas)
+       .kana-section      → wrapper tiap sub-tabel + sub-judul
+       .kana-section-title→ sub-judul dengan left-border accent
+       .kana-table        → <table> dengan border-collapse
+       .kana-table th     → header kolom/baris (warna muted)
+       .kana-cell         → <td> normal (karakter + romaji)
+       .kana-char         → display block, font besar (karakter)
+       .kana-romaji       → display block, font kecil (romaji)
+       .kana-empty        → sel kosong (background berbeda)
+       .kana-combo        → sel kombinasi (background sedikit berbeda)
+       .modal-open        → class pada body saat modal aktif (overflow:hidden)
+
+════════════════════════════════════════════════════════════
+  BAGIAN 2 — HALAMAN LEARNING DI INDEX.HTML (Menu Utama)
+════════════════════════════════════════════════════════════
+
+📌 DESKRIPSI:
+  Di index.html akan ditambahkan card baru "📚 Belajar Kana"
+  yang mengarah ke project/pages/learning.html
+
+📌 KONTEN HALAMAN LEARNING:
+
+  ── SECTION 1: HERO / PENGENALAN
+     Judul besar: "Panduan Lengkap Hiragana & Katakana"
+     Sub: "Kuasai 2 aksara dasar bahasa Jepang"
+     Penjelasan:
+     - Bahasa Jepang punya 3 sistem tulisan: Hiragana, Katakana, Kanji
+     - Hiragana → aksara asli Jepang (kata-kata native, partikel,
+       okurigana / akhiran kata kerja)
+     - Katakana → kata serapan asing (テレビ=TV, コーヒー=kopi),
+       nama asing, onomatope, penekanan
+     - Kedua aksara = 46 karakter dasar + variasi dakuten & kombinasi
+
+  ── SECTION 2: TABEL HIRAGANA LENGKAP (tema ungu)
+     Sub-judul: "ひらがな — Hiragana"
+     BERISI 3 SUB-TABEL PERSIS SEPERTI POPUP:
+     a) Karakter Dasar — 46 karakter
+     b) Dakuten & Handakuten — 25 karakter
+     c) Kombinasi (Youon) — 33 kombinasi
+     Setiap sel: karakter besar + romaji kecil + contoh kata (tooltip hover)
+     Contoh tooltip:
+       あ → hover → "あり (ari) = semut"
+       か → hover → "かさ (kasa) = payung"
+
+  ── SECTION 3: TABEL KATAKANA LENGKAP (tema hijau)
+     Sub-judul: "カタカナ — Katakana"
+     BERISI 3 SUB-TABEL PERSIS SEPERTI POPUP:
+     a) Karakter Dasar — 46 karakter
+     b) Dakuten & Handakuten — 25 karakter
+     c) Kombinasi (Youon) — 33 kombinasi
+     Setiap sel: karakter besar + romaji kecil + contoh kata (tooltip hover)
+     Contoh tooltip:
+       ア → hover → "アイス (aisu) = es"
+       カ → hover → "カメラ (kamera) = kamera"
+
+  ── SECTION 4: PERBANDINGAN HIRAGANA VS KATAKANA
+     Tabel side-by-side:
+     │ Romaji │ Hiragana │ Katakana │ Contoh Kata          │
+     │ a      │ あ       │ ア       │ あさ / アニメ         │
+     │ ka     │ か       │ カ       │ かみ / カメラ         │
+     │ ...    │ ...      │ ...      │ ...                  │
+     (Tampilkan 20-25 baris yang paling umum)
+
+  ── SECTION 5: TIPS & PENGECUALIAN BACA
+     Card-card kecil berisi:
+     🔤 Pengecualian Romaji:
+       - し = shi (bukan si)
+       - ち = chi (bukan ti)
+       - つ = tsu (bukan tu)
+       - じ & ぢ = ji (sama bunyinya)
+       - ず & づ = zu (sama bunyinya)
+       - ふ = fu (bukan hu)
+     📝 Tips Hafalan:
+       - Hafal 5 vokal dulu: あいうえお (a i u e o)
+       - Pelajari per baris: Ka→Sa→Ta→Na→Ha→Ma→Ya→Ra→Wa
+       - Tulis berulang dengan tangan (satu karakter per hari)
+       - Latih dengan mengetik di Tokutype!
+     🔊 Cara Baca Dakuten:
+       - か (ka) + ゛ = が (ga) → k berubah ke g
+       - さ (sa) + ゛ = ざ (za) → s berubah ke z
+       - た (ta) + ゛ = だ (da) → t berubah ke d
+       - は (ha) + ゛ = ば (ba) → h berubah ke b
+       - は (ha) + ゜ = ぱ (pa) → h berubah ke p
+
+  ── SECTION 6: CONTOH KATA UMUM PER KATEGORI
+     Grid card 2 kolom (Hiragana | Katakana):
+
+     HIRAGANA — Kata Sehari-hari:
+     ┌──────────────────────────────────┐
+     │ あり      ari       = semut      │
+     │ はな      hana      = bunga      │
+     │ みず      mizu      = air        │
+     │ やま      yama      = gunung     │
+     │ かわ      kawa      = sungai     │
+     │ ねこ      neko      = kucing     │
+     │ いぬ      inu       = anjing     │
+     │ さかな    sakana    = ikan       │
+     │ たべる    taberu    = makan      │
+     │ のむ      nomu      = minum      │
+     └──────────────────────────────────┘
+
+     KATAKANA — Kata Serapan:
+     ┌──────────────────────────────────┐
+     │ テレビ    terebi    = TV          │
+     │ コーヒー  kōhī      = kopi        │
+     │ スマホ    sumaho    = smartphone  │
+     │ アイス    aisu      = es krim     │
+     │ ゲーム    gēmu      = game        │
+     │ カメラ    kamera    = kamera      │
+     │ バス      basu      = bus         │
+     │ ホテル    hoteru    = hotel       │
+     │ パン      pan       = roti        │
+     │ エアコン  eakon     = AC          │
+     └──────────────────────────────────┘
+
+  ── SECTION 7: CTA (Call to Action)
+     Teks: "Sudah siap berlatih? Mulai dari karakter yang mudah!"
+     Tombol-tombol:
+     [← Kembali ke Menu]  [▶ Latihan Hiragana]  [▶ Latihan Katakana]
+
+📌 FILE YANG DIBUAT/DIUBAH (Bagian 2):
+  1. project/pages/learning.html  [FILE BARU]
+     - Halaman standalone dengan navbar sendiri
+     - Semua 7 section di atas
+     - Tema: dark mode campuran ungu-hijau (neutral)
+     - Tooltip hover menggunakan CSS (tidak butuh JS)
+     - Smooth scroll antar section
+
+  2. index.html  [DIUBAH]
+     - Card ke-4 di menu-grid: "📚 Belajar Kana"
+     - Gradient: linear-gradient(135deg, #f59e0b, #d97706) (emas/amber)
+     - atau linear-gradient(135deg, #6366f1, #4338ca) (indigo)
+     - Link: ./project/pages/learning.html
+
+  3. project/styles/base.css  [DIUBAH]
+     CSS tambahan untuk learning.html:
+       .learn-wrap        → main container (max-width 1000px)
+       .learn-section     → tiap section dengan padding
+       .section-divider   → garis pemisah antar section
+       .learn-hero        → section hero dengan gradient teks
+       .kana-full-table   → tabel besar hiragana/katakana di learning
+       .kana-tooltip      → tooltip saat hover sel karakter
+       .comparison-grid   → grid tabel perbandingan
+       .tip-cards         → grid card tips (3 kolom)
+       .tip-card          → satu card tips
+       .example-grid      → grid contoh kata (2 kolom)
+       .example-row       → satu baris contoh kata
+       .cta-wrap          → wrapper tombol CTA
+       .cta-btn           → tombol aksi (variant: primary/ghost)
+
+════════════════════════════════════════════════════════════
+  RINGKASAN FILE YANG AKAN DIUBAH / DIBUAT
+════════════════════════════════════════════════════════════
+
+  [UBAH]  index.html                        → tambah card Learning
+  [UBAH]  project/pages/hiragana.html       → tambah button + modal popup lengkap
+  [UBAH]  project/pages/katakana.html       → tambah button + modal popup lengkap
+  [UBAH]  project/styles/base.css           → tambah semua CSS baru
+  [BARU]  project/pages/learning.html       → halaman learning lengkap
+
+════════════════════════════════════════════════════════════
+  URUTAN PENGERJAAN YANG DISARANKAN
+════════════════════════════════════════════════════════════
+
+  STEP 1: Update base.css → tambah semua CSS baru (modal + learning)
+  STEP 2: Update hiragana.html → button + popup 3 sub-tabel hiragana
+  STEP 3: Update katakana.html → button + popup 3 sub-tabel katakana
+  STEP 4: Buat learning.html → halaman panduan lengkap dengan semua tabel
+  STEP 5: Update index.html → tambah card Learning
+
+════════════════════════════════════════════════════════════
+  CATATAN DESAIN
+════════════════════════════════════════════════════════════
+
+  - Modal popup: glassmorphism (backdrop-filter: blur(8px))
+  - Animasi modal masuk: fade + scale 0.92→1.0, durasi 250ms
+  - Tabel kana: hover sel → glow warna --accent tema
+  - Font karakter kana: "Noto Sans JP" / "Hiragino Kaku Gothic"
+    agar karakter Jepang tampil dengan indah
+  - Sel kosong (ex: yi, wu): background rgba(255,255,255,0.02)
+    dengan opacity 0.3 agar grid tetap rapi tapi jelas kosong
+  - Sub-tabel dakuten: ada badge kecil "゛" dan "゜" di sub-judul
+  - Semua tabel responsif: pada mobile < 480px font dikecilkan 70%
+    dan scroll horizontal diaktifkan
+  - Tooltip contoh kata: muncul saat hover dengan CSS ::after pseudo
+  - Halaman learning: sticky section nav (klik untuk scroll ke section)
+  - Gunakan CSS variable yang sudah ada (--accent, --accent-2, dll)
+  - Popup hiragana: .modal-box mendapat class "theme-hiragana"
+  - Popup katakana: .modal-box mendapat class "theme-katakana"
+    Sehingga warna bisa diatur via CSS tanpa JS tambahan
+
+════════════════════════════════════════════════════════════
+  PROMPT SIAP PAKAI UNTUK IMPLEMENTASI
+════════════════════════════════════════════════════════════
+
+  "Tolong implementasikan rencana di popup.txt untuk project Tokutype.
+   Rincian tabel yang harus dibuat ada LENGKAP di popup.txt:
+
+   BAGIAN 1 — POPUP DI HALAMAN QUIZ:
+   1. Update hiragana.html: tambah button '📖 Tabel' di navbar.
+      Tambah modal popup berisi 3 sub-tabel HIRAGANA LENGKAP:
+      (a) Karakter Dasar (gojuuon): 11 baris × 5 kolom,
+          setiap sel = karakter hiragana besar + romaji kecil
+      (b) Dakuten & Handakuten: 5 baris × 5 kolom (ga-za-da-ba-pa)
+      (c) Kombinasi Youon: 11 baris × 3 kolom (ya/yu/yo)
+      Modal bisa ditutup: tombol X, klik overlay, tekan Escape.
+      Tema warna UNGU sesuai tema hiragana (gunakan --accent dari CSS).
+
+   2. Update katakana.html: sama persis tapi isi tabel KATAKANA
+      dan tema warna HIJAU sesuai tema katakana.
+
+   BAGIAN 2 — HALAMAN LEARNING:
+   3. Buat project/pages/learning.html berisi:
+      - Pengenalan hiragana & katakana
+      - Tabel HIRAGANA LENGKAP (3 sub-tabel: dasar+dakuten+kombinasi)
+        setiap sel ada tooltip contoh kata saat hover
+      - Tabel KATAKANA LENGKAP (3 sub-tabel: dasar+dakuten+kombinasi)
+        setiap sel ada tooltip contoh kata saat hover
+      - Tabel perbandingan hiragana vs katakana
+      - Card tips & pengecualian baca (shi/chi/tsu/fu/ji/zu)
+      - Contoh kata umum: 10 hiragana native + 10 katakana serapan
+      - Tombol CTA: balik ke menu, mulai latihan hiragana/katakana
+
+   4. Tambah card '📚 Belajar Kana' di index.html → link ke learning.html
+
+   5. Tambah SEMUA CSS yang diperlukan ke base.css:
+      modal overlay, modal box, tabel kana, sel, tooltip,
+      halaman learning, tip cards, example grid, CTA buttons.
+
+   Pastikan semua warna dan tema mengikuti CSS variable yang sudah ada
+   di base.css (--accent, --accent-2, --page-bg, --muted, dst.)
+   dan font Noto Sans JP digunakan untuk karakter Jepang."
+
+============================================================
+  END OF PLAN v2
+============================================================
